@@ -11,8 +11,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Entity
-@Table(name = "orders")
 @Getter @Setter
+@Table(name = "orders")
 public class Order {
 
     @Id @GeneratedValue
@@ -23,11 +23,14 @@ public class Order {
     @JoinColumn(name = "member_id")
     private Member member;
 
+    @OneToMany(mappedBy = "order")
     private List<OrderItem> orderItems = new ArrayList<>();
 
+    @OneToOne
+    @JoinColumn(name = "delivery_id")
     private Delivery delivery;
 
-    private LocalDateTime orderDate;
+    private LocalDateTime orderDate; // 주문 시간
 
     private OrderStatus status; // 주문상태 [ORDER, CANCEL]
 
